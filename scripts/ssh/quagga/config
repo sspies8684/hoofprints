@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+QUAGGA_PREFIX=~/quagga-installation
+
+CONFIG_FILE=$QUAGGA_PREFIX/etc/bgpd.conf
+PID_FILE=$QUAGGA_PREFIX/bgpd.pid
+BGPD=$QUAGGA_PREFIX/bin/bgpd
+
+TEMP_FILE=/tmp/bgpd.conf

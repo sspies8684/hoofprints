@@ -1,0 +1,9 @@
+#!/bin/sh
+
+
+OBGP_PREFIX=/usr
+
+CONFIG_FILE=/etc/bgpd.conf
+BGPD=$OBGP_PREFIX/sbin/bgpd
+
+TEMP_FILE=/tmp/bgpd.conf

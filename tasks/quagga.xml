@@ -1,0 +1,53 @@
+<project name="quagga tasks" basedir="..">
+
+	<property file="${conf.home}/quagga.properties" />
+
+	<target name="makeQuaggaDirs">
+		<mkdir dir="${quagga.build.home}" />
+		<mkdir dir="${quagga.installation.home}" />
+	</target>
+
+	<target name="setupQuaggaAddress">
+		<setIP networkinterface="${test.interface}" ip="${quagga.ip}" netbits="${test.netbits}" />
+	</target>
+
+	<target name="setupQuaggaAddress6">
+		<setIP networkinterface="${test.interface}" ip="${quagga.ip6}" netbits="${test.netbits6}" />
+	</target>
+
+
+	<target name="unpackQuagga" depends="makeQuaggaDirs">
+		<untar src="${quagga.src}" compression="gzip" dest="${quagga.build.home}/.." />
+	</target>
+
+	<target name="compileQuagga" depends="unpackQuagga">
+		<exec executable="sh" dir="${quagga.build.home}">
+			<arg value="configure" />
+			<arg value="--disable-ripd" />
+			<arg value="--disable-zebra" />
+			<arg value="--disable-ripd" />
+			<arg value="--disable-ripngd" />
+			<arg value="--disable-ospfd" />
+			<arg value="--disable-ospf6d" />
+			<arg value="--disable-ospfapi" />
+			<arg value="--disable-ospfclient" />
+			<arg value="--disable-vtysh" />
+			<arg value="--disable-watchquagga" />
+			<arg value="--disable-rtadv" />
+			<arg value="--sysconfdir=${quagga.conf.home}" />
+			<arg value="--prefix=${quagga.installation.home}" />
+			<arg value="--sbindir=${quagga.installation.home}/bin" />
+			<arg value="--localstatedir=${quagga.conf.home}" />
+		</exec>
+		<exec executable="make" dir="${quagga.build.home}" />
+		<exec executable="make" dir="${quagga.build.home}">
+			<arg value="install" />
+		</exec>
+
+	</target>
+
+	<target name="cleanQuagga">
+		<delete dir="${quagga.installation.home}" />
+		<delete dir="${quagga.build.home}" />
+	</target>
+</project>

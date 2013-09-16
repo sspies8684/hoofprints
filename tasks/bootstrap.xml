@@ -1,0 +1,12 @@
+<project name="Hoofprints Bootstrap" default="compile" basedir="..">
+	<property file="../conf/test.properties" />
+	
+	<target name="compile">
+		<javac destdir="${build.home}">
+			<classpath location="${lib.home}/junit-4.6.jar" />
+			<classpath location="${lib.home}/log4j-1.2.15.jar" />
+			<src path="${src.home}" />
+		</javac>
+	</target>
+
+</project>

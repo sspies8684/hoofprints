@@ -1,0 +1,45 @@
+<project name="bird tasks" basedir=".">
+	<property file="${conf.home}/bird.properties" />
+
+	<target name="makeBirdDirs">
+		<mkdir dir="${bird.build.home}" />
+		<mkdir dir="${bird.installation.home}" />
+	</target>
+
+	<target name="setupBirdAddress">
+		<setIP networkinterface="${test.interface}" ip="${bird.ip}" netbits="${test.netbits}" />
+	</target>
+
+
+	<target name="unpackBird" depends="makeBirdDirs">
+		<untar src="${bird.src}" compression="gzip" dest="${bird.build.home}/.." />
+	</target>
+
+	<target name="compileBird" depends="unpackBird">
+
+		<exec executable="chmod" dir="${bird.build.home}/tools">
+			<arg value="u+x" />
+			<arg value="mergedirs" />
+		</exec>
+
+		<exec executable="sh" dir="${bird.build.home}">
+			<arg value="configure" />
+			<arg value="--enable-client" />
+			<arg value="--disable-ipv6" />
+			<arg value="--prefix=${bird.installation.home}" />
+			<arg value="--sbindir=${bird.installation.home}/bin" />
+		</exec>
+
+		<exec executable="make" dir="${bird.build.home}" />
+
+		<exec executable="make" dir="${bird.build.home}">
+			<arg value="install" />
+		</exec>
+	</target>
+	
+	
+	<target name="cleanBird">
+		<delete dir="${bird.installation.home}"/>
+		<delete dir="${bird.build.home}"/>
+	</target>
+</project>

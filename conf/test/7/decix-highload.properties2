@@ -1,0 +1,70 @@
+### T7 DE-CIX Real World Test
+
+T7.daemons=QuaggaManager,RemoteScriptManager:conf/openbgpd_script.properties
+
+# Total Time the Test Runs (in secs)
+T7.testRunTime.Integer=600
+
+# Number of Peers to connect to the Routeserver
+T7.numberOfPeers.Integer=500
+
+
+## Timer Rates (in secs)
+
+# Rate at which one of the connected peers sends a Withdrawal
+T7.withdrawalRate.Integer=10
+
+# Rate at which one of the connected peers resets TCP connection
+T7.tcpFailRate.Integer=50
+
+# Rate at which an UPDATE hits an martians allow out filter
+T7.allowFilterHitMartiansOutRate.Integer=10
+
+# ... and so on ;-)
+T7.denyFilterHitMartiansOutRate.Integer=10
+T7.allowFilterHitPrefixesInRate.Integer=10
+T7.denyFilterHitPrefixesInRate.Integer=10
+T7.allowFilterHitSourceAsInRate.Integer=10
+T7.denyFilterHitSourceAsInRate.Integer=10
+T7.communityNoExportRate.Integer=10
+T7.communityAllowAllRate.Integer=10
+T7.communityDenyAllRate.Integer=10
+T7.communityDenyPeerRate.Integer=10
+T7.communityAllowPeerRate.Integer=10
+# TODO bursts
+
+# Fraction of Peers that are configured as transparent Peers
+T7.fractionAttributeUnchanged.Float=0.8
+
+# Fraction of Peers that are configured as rsclient Peers
+T7.fractionRsClientPeers.Float=0.1
+# implicit: T7.fractionNonRsClientPeers.Float= 1 - fractionRsClientPeers
+
+# Number of allowed Prefixes per Peer, for Filter Generation
+T7.allowedPrefixesPerPeer.Integer=80
+
+# Number of allowed Source AS' per Peer, for Filter Generation
+T7.allowedSourceAsPerPeer.Integer=100
+
+# Fraction of Peers, that talk MD5
+T7.fractionMD5Peers.Float=0.1
+
+# Fraction of Peers, that have Route Refresh Capability
+T7.fractionRouteRefreshPeers.Float=0.7
+
+# Fraction of Peers, that have AS4 Capability
+T7.fractionAS4Peers.Float=0.76
+
+# Fraction of Peers, that have an IPv6 EndpoInteger
+T7.fractionV6Endpoints.Float=0.3
+# implicit: fractionV4EndpoIntegers.Float= 1 - fractionV6EndpoIntegers
+
+# Fraction of IPv4-Peers, that have Multiprotocol Capability
+T7.fractionV4MP.Float=0.5
+
+# implicit: fractionV4NonMP .Integer= 1 - fractionV4MP
+T7.fractionV4MPOverNLRI.Float=0.5
+# implicit: fractionV4MPOverMP .Integer= 1 - fractionV4MPOverNLRI
+T7.averageAsPathLength.Integer=8
+
+T7.asPathLengthEpsilon.Integer=5

@@ -1,0 +1,52 @@
+Building and Running Hoofprints
+-------------------------------
+
+
+Dependencies
+============
+
+ * Java 6 JDK
+ * Apache Ant
+ * build-essentials for compiling quagga & BIRD
+
+Quick Start
+===========
+
+Let's assume you simply want to test Quagga on your local machine. 
+
+First of all bootstrap the java files:
+$ ant -f tasks/bootstrap.xml
+
+To configure the test network open the file * conf/network.xml * 
+There you should check, if the supplied configuration does not overlap with 
+your local configuration.
+
+If you made any changes to the file above, please open * conf/quagga.xml * and 
+edit the file accordingly.
+
+If you decide that it's time to setup the network run the following commands:
+$ ant -f tasks/build.xml setupAddresses
+$ ant -f tasks/build.xml setupQuaggaAddress
+
+
+Go to the hoofprints root directory and type the following:
+$ ant -f tasks/build.xml compileQuagga
+
+When this script has finished, there should be a new installation of Quagga in
+tmp/build/quagga-0.99.15. Please verify that Quagga has been installed to the 
+right place.
+
+Now compile Hoofprints:
+$ ant -f tasks/build.xml compile
+
+
+
+Now you're ready to go:
+
+To run a testcase that connects a lot of clients, type:
+$ ant -f tasks/build.xml T1
+
+To send a lot of prefixes, type:
+$ ant -f tasks/build.xml T2
+
+

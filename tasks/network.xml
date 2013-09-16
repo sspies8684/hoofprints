@@ -1,0 +1,15 @@
+<project name="Network Configuration" basedir="..">
+	<property file="${conf.home}/network.properties" />
+
+
+	<target name="setupAddresses">
+		<setIP networkinterface="${test.interface}" ip="${test.main.ip}" netbits="${test.netbits}" />
+		<setIP networkinterface="${test.interface}" ip="${test.subnet.ip.start}" netbits="${test.netbits}" num="${test.subnet.ip.num}" />
+	</target>
+
+	<target name="setupInet6Addresses">
+		<setIP6 networkinterface="${test.interface}" ip="${test.main.ip6}" netbits="${test.netbits6}" />
+		<setIP6 networkinterface="${test.interface}" ip="${test.subnet.ip6.start}" netbits="${test.netbits6}" num="${test.subnet.ip6.num}" />
+	</target>
+
+</project>
